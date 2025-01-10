@@ -19,12 +19,9 @@ cv_image = None
 # Load ArcFace ONNX model
 arcface_model = cv2.dnn.readNetFromONNX("arcface.onnx")
 
-token = "7069241657:AAHo2Ipk1uvWj9dvESEMxSO-OcauycAQljU"
+token = "YOUR TOKEN"
 bot = Bot(token=token)
-bot_username = "@FaceRecognitionRisiwbTTPU_bot"
-# chat_id = 6462190694
-
-admins = [6462190694]
+bot_username = "YOUR BOT'S USERNAME"
 
 
 #                   ============= TELEGRAM COMMANDS ============== 
