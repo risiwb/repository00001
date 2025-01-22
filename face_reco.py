@@ -204,14 +204,17 @@ def load_known_faces(folder="known_faces"):
     known_faces = {}
     for name in os.listdir(folder):
         person_folder = os.path.join(folder, name)
-        embeddings = []
-        for img_file in os.listdir(person_folder):
-            img_path = os.path.join(person_folder, img_file)    
-            image = cv2.imread(img_path)
-            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            embedding = get_face_embedding(image)
-            embeddings.append(embedding)
-        known_faces[name] = embeddings
+        if os.path.isdir(person_folder) and not name.startswith('.'):
+            embeddings = []
+            for img_file in os.listdir(person_folder):
+                img_path = os.path.join(person_folder, img_file)
+                image = cv2.imread(img_path)
+                if image is None:
+                    continue
+                gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+                embedding = get_face_embedding(image)
+                embeddings.append(embedding)
+            known_faces[name] = embeddings
     return known_faces
 
 def get_student_names(folder="known_faces"):
